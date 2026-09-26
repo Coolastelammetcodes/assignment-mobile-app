@@ -1,9 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export default function Index() {
+export default function Journal() {
   return (
     <View style={s.root}>
-      <Text style={s.title}>My Mobile App</Text>
+      <Text style={s.title}>Journal</Text>
       <Text>Edit src/app/index.tsx to edit this screen.</Text>
     </View>
   );
