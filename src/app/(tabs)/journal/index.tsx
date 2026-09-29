@@ -1,16 +1,26 @@
+import RatingSlider from "@/components/rating-slider";
+import Slider from "@react-native-community/slider";
+import { useState } from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Journal() {
+  const [value, setValue] = useState(0);
+
   return (
-    <View style={s.root}>
+    <SafeAreaView style={s.root}>
       <View style={s.surface}>
-        <Text style={s.title}>Journal</Text>
+        <Text style={[s.title, s.text]}>Journal</Text>
       </View>
+      
       <View style={s.surface}>
-        <Text>Ge dagen ett betyg mellan 1-10</Text>
+        <Text style={s.text}>Ge dagen ett betyg mellan 1-10</Text>
       </View>
+      
+      <RatingSlider value={value} highestValue={10} step={1} onChange={setValue} />
+
       <TextInput style={[s.surface, s.input]} placeholder="Skriv något" />
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -19,13 +29,15 @@ const s = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'condensedBold',
     fontStyle: "italic",
-    marginTop:8,
   },
   input: {
     backgroundColor:"#E7E2EF"
   },
+  text: {
+    color:"#F2EFF7",
+  },
   surface: {
-    backgroundColor:"#F2EFF7",
+    backgroundColor:"#AAA0C8",
     marginHorizontal:16,
     paddingHorizontal:10,
     borderRadius:12,
@@ -33,7 +45,7 @@ const s = StyleSheet.create({
   },
   root: {
     flex: 1,
-    backgroundColor:"#252A41",
+    backgroundColor:"#120239",
     gap:8,
   },
 });
