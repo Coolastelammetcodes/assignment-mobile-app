@@ -1,6 +1,5 @@
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { StyleSheet } from "react-native";
 
 export default function TabsLayout() {
   return (

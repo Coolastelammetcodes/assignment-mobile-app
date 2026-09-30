@@ -1,5 +1,4 @@
 import RatingSlider from "@/components/rating-slider";
-import Slider from "@react-native-community/slider";
 import { useState } from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,7 +16,7 @@ export default function Journal() {
         <Text style={s.text}>Ge dagen ett betyg mellan 1-10</Text>
       </View>
       
-      <RatingSlider value={value} highestValue={10} step={1} onChange={setValue} />
+      <RatingSlider value={value} highestValue={10} step={1} textColor="#E7E2EF" sliderColor="#A865B5" onChange={setValue} />
 
       <TextInput style={[s.surface, s.input]} placeholder="Skriv något" />
     </SafeAreaView>
