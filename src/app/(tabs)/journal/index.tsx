@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Journal() {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(10);
 
   return (
     <SafeAreaView style={s.root}>
@@ -17,7 +17,7 @@ export default function Journal() {
       </View>
       
       <RatingSlider value={value} highestValue={10} step={1} textColor="#E7E2EF" sliderColor="#A865B5" onChange={setValue} />
-
+      
       <TextInput style={[s.surface, s.input]} placeholder="Skriv något" />
     </SafeAreaView>
   );

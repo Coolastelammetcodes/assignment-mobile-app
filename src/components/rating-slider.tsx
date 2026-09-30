@@ -1,5 +1,5 @@
 import Slider from "@react-native-community/slider";
-import { StyleSheet, Text} from "react-native";
+import { StyleSheet, Text, View} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics  from "expo-haptics"
 
@@ -20,27 +20,36 @@ export default function RatingSlider({ value, highestValue, step, textColor, sli
   }
 
   return (
-    <SafeAreaView>
-      <Text style={s.emoji}>😁</Text>
-      <Text style={{color: textColor }}>{value}/{highestValue}</Text>
-      <Slider
-        minimumValue={0}
-        maximumValue={highestValue}
-        value={value}
-        onValueChange={handleChange}
-        step={step}
-        thumbTintColor={sliderColor}
-        minimumTrackTintColor={sliderColor}
-      />
+    <SafeAreaView style={s.root}>
+      
+        <Text style={s.emoji}>😁</Text>
+        <Text style={{color: textColor }}>{value}/{highestValue}</Text>
+      
+      
+      <View style={s.slider}>
+        <Slider
+          minimumValue={0}
+          maximumValue={highestValue}
+          value={value}
+          onValueChange={handleChange}
+          step={step}
+          thumbTintColor={sliderColor}
+          minimumTrackTintColor={sliderColor}
+        />
+      </View>
     </SafeAreaView>
   );
 }
 
 const s = StyleSheet.create({
-  emoji: {
+  root: {
     display:"flex",
-    fontSize: 30,
-    justifyContent:"center",
-    alignContent:"center",
+    alignItems:"center",
+  },
+  emoji: {
+    fontSize: 40,
+  },
+  slider: {
+    width:"90%"
   }
 })
