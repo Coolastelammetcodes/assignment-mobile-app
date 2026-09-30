@@ -10,5 +10,7 @@ This app is built with components from React-Native and Expo. The components tha
 -- Text
 -- View
 -- TextInput
+-- Button 
 
 #### Expo
+-- Haptics for vibrations when value changes in slider
