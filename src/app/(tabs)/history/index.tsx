@@ -1,9 +1,8 @@
 import { Link } from 'expo-router';
-import { FlatList, Pressable, Text, View } from 'react-native';
+import { StyleSheet, FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JournalCard from '@/components/journal-card';
 import { useJournal } from '@/components/journal-provider';
-import { journalStyles as styles } from '@/components/journal-styles';
 
 export default function History() {
   const journal = useJournal();
@@ -16,29 +15,29 @@ export default function History() {
   }
 
   return (
-    <SafeAreaView style={styles.root} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={journalStyles.root} edges={['top', 'left', 'right']}>
       {/* FlatList creates cards as needed, so a long history still scrolls smoothly. */}
       <FlatList
         data={journal.entries}
         keyExtractor={(entry) => entry.id}
         renderItem={({ item }) => <JournalCard entry={item} />}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={journalStyles.content}
         ListHeaderComponent={
-          <View style={styles.heading}>
-            <Text style={styles.title}>Historik</Text>
-            <Text style={styles.text}>Dina sparade tankar, med det senaste inlägget först.</Text>
+          <View style={journalStyles.heading}>
+            <Text style={journalStyles.title}>Historik</Text>
+            <Text style={journalStyles.text}>Dina sparade tankar, med det senaste inlägget först.</Text>
           </View>
         }
         ListEmptyComponent={
-          <View style={styles.card}>
-            <Text style={styles.cardText}>{emptyMessage}</Text>
+          <View style={journalStyles.card}>
+            <Text style={journalStyles.cardText}>{emptyMessage}</Text>
             {journal.error !== '' && (
-              <Pressable style={styles.button} onPress={journal.reload} accessibilityRole="button">
-                <Text style={styles.buttonText}>Försök igen</Text>
+              <Pressable style={journalStyles.button} onPress={journal.reload} accessibilityRole="button">
+                <Text style={journalStyles.buttonText}>Försök igen</Text>
               </Pressable>
             )}
             {!journal.loading && journal.error === '' && (
-              <Link href="/journal" style={styles.label}>Skriv ditt första inlägg →</Link>
+              <Link href="/journal" style={journalStyles.label}>Skriv ditt första inlägg →</Link>
             )}
           </View>
         }
@@ -46,3 +45,57 @@ export default function History() {
     </SafeAreaView>
   );
 }
+
+const journalStyles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: '#120239',
+  },
+  content: {
+    padding: 16,
+    gap: 16,
+    paddingBottom: 32,
+  },
+  heading: {
+    gap: 8,
+  },
+  title: {
+    fontSize: 40,
+    fontWeight: '700',
+    fontStyle: 'italic',
+    color: '#F2EFF7',
+  },
+  text: {
+    color: '#F2EFF7',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  card: {
+    backgroundColor: '#E7E2EF',
+    padding: 18,
+    borderRadius: 16,
+    gap: 10,
+  },
+  cardText: {
+    color: '#120239',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  button: {
+    backgroundColor: '#6D438D',
+    borderRadius: 12,
+    padding: 14,
+    alignItems: 'center',
+    minHeight: 48,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  label: {
+    color: '#120239',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+});

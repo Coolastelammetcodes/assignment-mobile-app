@@ -1,6 +1,5 @@
 ﻿import { Feather } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { journalStyles } from './journal-styles';
 
 // The parent owns the draft; callbacks update it when thoughts are added or removed.
 type Props = {
@@ -33,11 +32,11 @@ export default function InputPills({ text, items, onChangeText, onChangeItems, d
 
   const addDisabled = disabled || text.trim() === '';
   return (
-    <View style={styles.container}>
-      <Text style={journalStyles.text}>Vad vill du minnas från dagen?</Text>
-      <View style={styles.inputGroup}>
+    <View style={s.container}>
+      <Text style={s.text}>Vad vill du minnas från dagen?</Text>
+      <View style={s.inputGroup}>
         <TextInput
-          style={[journalStyles.input, styles.input]}
+          style={[s.inputBase, s.input]}
           placeholder="Skriv en tanke om dagen…"
           placeholderTextColor="#625775"
           accessibilityLabel="Anteckning om dagen"
@@ -47,20 +46,20 @@ export default function InputPills({ text, items, onChangeText, onChangeItems, d
           editable={!disabled}
         />
         <Pressable
-          style={[journalStyles.button, styles.addButton, addDisabled && journalStyles.disabled]}
+          style={[s.button, s.addButton, addDisabled && s.disabled]}
           onPress={addItem}
           disabled={addDisabled}
           accessibilityRole="button"
           accessibilityState={{ disabled: addDisabled }}
         >
-          <Text style={journalStyles.buttonText}>Lägg till tanke</Text>
+          <Text style={s.buttonText}>Lägg till tanke</Text>
         </Pressable>
       </View>
-      <View style={styles.pillList}>
+      <View style={s.pillList}>
         {/* map creates one pill per thought and gives its remove button the matching index. */}
         {items.map((item, index) => (
-          <View key={index} style={styles.pill}>
-            <Text style={styles.pillText} numberOfLines={1} accessibilityLabel={item}>
+          <View key={index} style={s.pill}>
+            <Text style={s.pillText} numberOfLines={1} accessibilityLabel={item}>
               {item}
             </Text>
             <Pressable
@@ -68,7 +67,7 @@ export default function InputPills({ text, items, onChangeText, onChangeItems, d
               disabled={disabled}
               accessibilityRole="button"
               accessibilityLabel={`Ta bort tanke ${index + 1}: ${item}`}
-              style={styles.removeButton}
+              style={s.removeButton}
             >
               <Feather name="x" size={16} color="#F2EFF7" />
             </Pressable>
@@ -79,7 +78,35 @@ export default function InputPills({ text, items, onChangeText, onChangeItems, d
   );
 }
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
+  text: {
+    color: '#F2EFF7',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  inputBase: {
+    backgroundColor: '#E7E2EF',
+    color: '#120239',
+    padding: 14,
+    borderRadius: 12,
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+  button: {
+    backgroundColor: '#6D438D',
+    borderRadius: 12,
+    padding: 14,
+    alignItems: 'center',
+    minHeight: 48,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 16,
+  },
   container: {
     gap: 12,
   },

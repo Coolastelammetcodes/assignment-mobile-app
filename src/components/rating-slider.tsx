@@ -14,6 +14,23 @@ type Props = {
 };
 
 export default function RatingSlider({ value, highestValue, step, textColor, sliderColor, onChange, disabled }: Props) {
+  // Keep these styles inside the component because the text color comes from props.
+  const s = StyleSheet.create({
+    root: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    emoji: {
+      fontSize: 40,
+    },
+    rating: {
+      color: textColor,
+    },
+    slider: {
+      width: '90%',
+    },
+  });
+
   let emoji = '😁';
   if (value <= 3) {
     emoji = '😔';
@@ -35,11 +52,11 @@ export default function RatingSlider({ value, highestValue, step, textColor, sli
 
   return (
     <View style={s.root}>
-      
+
         <Text style={s.emoji}>{emoji}</Text>
-        <Text style={{color: textColor }}>{value}/{highestValue}</Text>
-      
-      
+        <Text style={s.rating}>{value}/{highestValue}</Text>
+
+
       <View style={s.slider}>
         <Slider
           minimumValue={1}
@@ -56,16 +73,3 @@ export default function RatingSlider({ value, highestValue, step, textColor, sli
     </View>
   );
 }
-
-const s = StyleSheet.create({
-  root: {
-    display:"flex",
-    alignItems:"center",
-  },
-  emoji: {
-    fontSize: 40,
-  },
-  slider: {
-    width:"90%"
-  }
-})

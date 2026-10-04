@@ -1,8 +1,7 @@
 import { Link } from 'expo-router';
-import { Pressable, Text } from 'react-native';
+import { StyleSheet, Pressable, Text } from 'react-native';
 import type { JournalEntry } from '@/types/journal';
 import { formatJournalDate } from './journal-date';
-import { journalStyles as styles } from './journal-styles';
 
 type Props = {
   entry: JournalEntry;
@@ -12,15 +11,34 @@ export default function JournalCard({ entry }: Props) {
   const date = formatJournalDate(entry.createdAt);
   return (
     <Link href={{ pathname: '/history/[id]', params: { id: entry.id } }} asChild>
-      <Pressable style={styles.card} accessibilityRole="button" accessibilityLabel={`Öppna inlägg från ${formatJournalDate(entry.createdAt)}`}>
-        <Text style={styles.label}>{date}</Text>
-        <Text style={styles.label}>Dagens betyg: {entry.rating}/10</Text>
-        <Text style={styles.label}>Tankar för dagen</Text>
+      <Pressable style={s.card} accessibilityRole="button" accessibilityLabel={`Öppna inlägg från ${formatJournalDate(entry.createdAt)}`}>
+        <Text style={s.label}>{date}</Text>
+        <Text style={s.label}>Dagens betyg: {entry.rating}/10</Text>
+        <Text style={s.label}>Tankar för dagen</Text>
         {entry.notes.map((note, index) => (
-          <Text key={index} style={styles.cardText}>• {note}</Text>
+          <Text key={index} style={s.cardText}>• {note}</Text>
         ))}
-        <Text style={styles.label}>Läs inlägget →</Text>
+        <Text style={s.label}>Läs inlägget →</Text>
       </Pressable>
     </Link>
   );
 }
+
+const s = StyleSheet.create({
+  card: {
+    backgroundColor: '#E7E2EF',
+    padding: 18,
+    borderRadius: 16,
+    gap: 10,
+  },
+  label: {
+    color: '#120239',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  cardText: {
+    color: '#120239',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+});

@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react';
 import { router } from 'expo-router';
-import { Pressable, Text, View } from 'react-native';
+import { StyleSheet, Pressable, Text, View } from 'react-native';
 import InputPills from './input-pills';
 import RatingSlider from './rating-slider';
 import { useJournal } from './journal-provider';
-import { journalStyles as styles } from './journal-styles';
 
 export default function JournalForm() {
   const [rating, setRating] = useState(10);
@@ -59,8 +58,8 @@ export default function JournalForm() {
   }
 
   return (
-    <View style={styles.form}>
-      <Text style={styles.text}>Ge dagen ett betyg mellan 1–10</Text>
+    <View style={s.form}>
+      <Text style={s.text}>Ge dagen ett betyg mellan 1–10</Text>
       <RatingSlider
         value={rating}
         highestValue={10}
@@ -78,26 +77,52 @@ export default function JournalForm() {
         disabled={saving}
       />
       {/* && shows the message only when the condition is true. */}
-      {journal.loading && <Text style={styles.text}>Läser journalen…</Text>}
+      {journal.loading && <Text style={s.text}>Läser journalen…</Text>}
       {journal.error !== '' && (
-        <View style={styles.form}>
-          <Text style={styles.text}>{journal.error}</Text>
-          <Pressable style={styles.button} onPress={journal.reload} accessibilityRole="button">
-            <Text style={styles.buttonText}>Försök igen</Text>
+        <View style={s.form}>
+          <Text style={s.text}>{journal.error}</Text>
+          <Pressable style={s.button} onPress={journal.reload} accessibilityRole="button">
+            <Text style={s.buttonText}>Försök igen</Text>
           </Pressable>
         </View>
       )}
       {saveError !== '' && (
-        <Text style={styles.text} accessibilityRole="alert">{saveError}</Text>
+        <Text style={s.text} accessibilityRole="alert">{saveError}</Text>
       )}
       <Pressable
-        style={[styles.button, saveDisabled && styles.disabled]}
+        style={[s.button, saveDisabled && s.disabled]}
         accessibilityRole="button"
         disabled={saveDisabled}
         onPress={saveJournal}
       >
-        <Text style={styles.buttonText}>{saveButtonText}</Text>
+        <Text style={s.buttonText}>{saveButtonText}</Text>
       </Pressable>
     </View>
   );
 }
+
+const s = StyleSheet.create({
+  form: {
+    gap: 16,
+  },
+  text: {
+    color: '#F2EFF7',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+  button: {
+    backgroundColor: '#6D438D',
+    borderRadius: 12,
+    padding: 14,
+    alignItems: 'center',
+    minHeight: 48,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+});

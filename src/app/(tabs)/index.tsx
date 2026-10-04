@@ -4,23 +4,26 @@ import { Link } from 'expo-router';
 
 export default function Index() {
   return (
-    <SafeAreaView style={s.root}> 
-      <View style={s.surface}>
-        <Text style={[s.title, s.text]}>Hem</Text>
+    <SafeAreaView style={journalStyles.root}>
+      <View style={journalStyles.surface}>
+        <Text style={[journalStyles.title, journalStyles.text]}>Hem</Text>
       </View>
-      <View style={s.surface}>
-        <Text style={s.text}>Få ner dagen i skrift och planera framtiden. Allt på samma plats</Text>
+      <View style={journalStyles.surface}>
+        <Text style={journalStyles.text}>Få ner dagen i skrift och planera framtiden. Allt på samma plats</Text>
       </View>
-      <View style={s.surface}>
-        <Link href="/journal" style={[s.text, { paddingVertical: 16 }]}>Skriv om din dag →</Link>
-        <Link href="/history" style={[s.text, { paddingVertical: 16 }]}>Läs dina tidigare inlägg →</Link>
+      <View style={journalStyles.surface}>
+        <Link href="/journal" style={[journalStyles.text, journalStyles.link]}>Skriv om din dag →</Link>
+        <Link href="/history" style={[journalStyles.text, journalStyles.link]}>Läs dina tidigare inlägg →</Link>
       </View>
     </SafeAreaView>
-    
+
   );
 }
 
-const s = StyleSheet.create({
+const journalStyles = StyleSheet.create({
+  link: {
+    paddingVertical: 16,
+  },
   title: {
     fontSize: 50,
     fontWeight: '700',

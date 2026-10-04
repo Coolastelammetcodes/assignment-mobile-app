@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Text } from 'react-native';
-import { journalStyles as styles } from './journal-styles';
+import { StyleSheet, Text } from 'react-native';
 
 export function formatJournalDate(date: string | Date) {
   const journalDate = new Date(date);
@@ -23,5 +22,13 @@ export default function JournalDate() {
       clearInterval(timer);
     };
   }, []);
-  return <Text style={styles.text}>{formatJournalDate(today)}</Text>;
+  return <Text style={s.text}>{formatJournalDate(today)}</Text>;
 }
+
+const s = StyleSheet.create({
+  text: {
+    color: '#F2EFF7',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+});
