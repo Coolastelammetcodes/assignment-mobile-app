@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Link } from 'expo-router';
 
 export default function Index() {
   return (
@@ -10,6 +11,10 @@ export default function Index() {
       <View style={s.surface}>
         <Text style={s.text}>Få ner dagen i skrift och planera framtiden. Allt på samma plats</Text>
       </View>
+      <View style={s.surface}>
+        <Link href="/journal" style={[s.text, { paddingVertical: 16 }]}>Skriv om din dag →</Link>
+        <Link href="/history" style={[s.text, { paddingVertical: 16 }]}>Läs dina tidigare inlägg →</Link>
+      </View>
     </SafeAreaView>
     
   );
@@ -18,7 +23,7 @@ export default function Index() {
 const s = StyleSheet.create({
   title: {
     fontSize: 50,
-    fontWeight: 'condensedBold',
+    fontWeight: '700',
     fontStyle: "italic",
   },
   input: {

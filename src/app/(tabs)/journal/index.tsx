@@ -1,52 +1,25 @@
-import InputPills from "@/components/input-pills";
-import RatingSlider from "@/components/rating-slider";
-import { useState } from "react";
-import { Text, View, StyleSheet, TextInput } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+﻿import { KeyboardAvoidingView, Platform, ScrollView, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import JournalDate from '@/components/journal-date';
+import JournalForm from '@/components/journal-form';
+import { journalStyles as styles } from '@/components/journal-styles';
 
 export default function Journal() {
-  const [value, setValue] = useState(10);
-  
+  let keyboardBehavior: 'height' | 'padding' = 'height';
+  if (Platform.OS === 'ios') {
+    keyboardBehavior = 'padding';
+  }
+
   return (
-    <SafeAreaView style={s.root}>
-      <View style={s.surface}>
-        <Text style={[s.title, s.text]}>Journal</Text>
-      </View>
-      
-      <View style={[s.surface, s.text]}>
-        <Text style={s.text} >Ge dagen ett betyg mellan 1-10</Text>
-      </View>  
-        
-      <RatingSlider value={value} highestValue={10} step={1} textColor="#E7E2EF" sliderColor="#8e0fa7" onChange={setValue} />
-
-      <InputPills />
-
+    <SafeAreaView style={styles.root} edges={['top', 'left', 'right']}>
+      {/* Keep the form reachable when the keyboard covers the bottom of the screen. */}
+      <KeyboardAvoidingView style={styles.fill} behavior={keyboardBehavior}>
+        <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
+          <Text style={styles.title}>Journal</Text>
+          <JournalDate />
+          <JournalForm />
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
-
-const s = StyleSheet.create({
-  title: {
-    fontSize: 50,
-    fontWeight: 'condensedBold',
-    fontStyle: "italic",
-  },
-  text: {
-    display: "flex",
-    justifyContent:"center",
-    alignItems:"center",
-    color:"#F2EFF7",
-  },
-  surface: {
-    backgroundColor:"#AAA0C8",
-    marginHorizontal:16,
-    paddingHorizontal:10,
-    borderRadius:12,
-    marginTop:8
-  },
-  root: {
-    flex: 1,
-    backgroundColor:"#120239",
-    gap:8,
-  },
-});

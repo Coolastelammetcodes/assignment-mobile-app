@@ -1,34 +1,50 @@
 import Slider from "@react-native-community/slider";
 import { StyleSheet, Text, View} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import * as Haptics  from "expo-haptics"
 
 
-export type props = {
+type Props = {
   value: number;
   highestValue: number;
   step: number;
   textColor: string;
   sliderColor: string;
   onChange: (value: number) => void;
+  disabled?: boolean;
 };
 
-export default function RatingSlider({ value, highestValue, step, textColor, sliderColor, onChange }: props) {
-  const handleChange = (newValue: number) => {
-    Haptics.selectionAsync();
-    onChange(newValue)
+export default function RatingSlider({ value, highestValue, step, textColor, sliderColor, onChange, disabled }: Props) {
+  let emoji = '😁';
+  if (value <= 3) {
+    emoji = '😔';
+  } else if (value <= 6) {
+    emoji = '😐';
+  }
+
+  async function handleChange(newValue: number) {
+    onChange(newValue);
+    if (newValue === value) {
+      return;
+    }
+    try {
+      await Haptics.selectionAsync();
+    } catch {
+      // Some devices cannot vibrate. The rating has already been updated.
+    }
   }
 
   return (
-    <SafeAreaView style={s.root}>
+    <View style={s.root}>
       
-        <Text style={s.emoji}>😁</Text>
+        <Text style={s.emoji}>{emoji}</Text>
         <Text style={{color: textColor }}>{value}/{highestValue}</Text>
       
       
       <View style={s.slider}>
         <Slider
-          minimumValue={0}
+          minimumValue={1}
+          disabled={disabled}
+          accessibilityLabel="Dagens betyg"
           maximumValue={highestValue}
           value={value}
           onValueChange={handleChange}
@@ -37,7 +53,7 @@ export default function RatingSlider({ value, highestValue, step, textColor, sli
           minimumTrackTintColor={sliderColor}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
