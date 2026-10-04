@@ -10,11 +10,11 @@ export default function Journal() {
   }
 
   return (
-    <SafeAreaView style={journalStyles.root} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={s.root} edges={['top', 'left', 'right']}>
       {/* Keep the form reachable when the keyboard covers the bottom of the screen. */}
-      <KeyboardAvoidingView style={journalStyles.fill} behavior={keyboardBehavior}>
-        <ScrollView contentContainerStyle={journalStyles.content} keyboardShouldPersistTaps="handled">
-          <Text style={journalStyles.title}>Journal</Text>
+      <KeyboardAvoidingView style={s.fill} behavior={keyboardBehavior}>
+        <ScrollView contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
+          <Text style={s.title}>Journal</Text>
           <JournalDate />
           <JournalForm />
         </ScrollView>
@@ -23,7 +23,7 @@ export default function Journal() {
   );
 }
 
-const journalStyles = StyleSheet.create({
+const s = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: '#120239',

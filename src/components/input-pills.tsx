@@ -33,7 +33,7 @@ export default function InputPills({ text, items, onChangeText, onChangeItems, d
   const addDisabled = disabled || text.trim() === '';
   return (
     <View style={s.container}>
-      <Text style={s.text}>Vad vill du minnas från dagen?</Text>
+      <Text style={s.text}>Skriv enstaka ord för att beskriva dagen</Text>
       <View style={s.inputGroup}>
         <TextInput
           style={[s.inputBase, s.input]}

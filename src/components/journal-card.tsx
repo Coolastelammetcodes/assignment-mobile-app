@@ -12,7 +12,7 @@ export default function JournalCard({ entry }: Props) {
   return (
     <Link href={{ pathname: '/history/[id]', params: { id: entry.id } }} asChild>
       <Pressable style={s.card} accessibilityRole="button" accessibilityLabel={`Öppna inlägg från ${formatJournalDate(entry.createdAt)}`}>
-        <Text style={s.label}>{date}</Text>
+        <Text style={[s.label, s.cardTitle]}>{date}</Text>
         <Text style={s.label}>Dagens betyg: {entry.rating}/10</Text>
         <Text style={s.label}>Tankar för dagen</Text>
         {entry.notes.map((note, index) => (
@@ -34,11 +34,16 @@ const s = StyleSheet.create({
   label: {
     color: '#120239',
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '400',
+  },
+  cardTitle:{
+    fontSize:25,
+    fontWeight:"bold"
   },
   cardText: {
     color: '#120239',
     fontSize: 16,
     lineHeight: 24,
+    fontStyle:"italic"
   },
 });

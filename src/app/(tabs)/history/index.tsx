@@ -15,29 +15,29 @@ export default function History() {
   }
 
   return (
-    <SafeAreaView style={journalStyles.root} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={s.root} edges={['top', 'left', 'right']}>
       {/* FlatList creates cards as needed, so a long history still scrolls smoothly. */}
       <FlatList
         data={journal.entries}
         keyExtractor={(entry) => entry.id}
         renderItem={({ item }) => <JournalCard entry={item} />}
-        contentContainerStyle={journalStyles.content}
+        contentContainerStyle={s.content}
         ListHeaderComponent={
-          <View style={journalStyles.heading}>
-            <Text style={journalStyles.title}>Historik</Text>
-            <Text style={journalStyles.text}>Dina sparade tankar, med det senaste inlägget först.</Text>
+          <View style={s.heading}>
+            <Text style={s.title}>Historik</Text>
+            <Text style={s.text}>Dina sparade tankar, med det senaste inlägget först.</Text>
           </View>
         }
         ListEmptyComponent={
-          <View style={journalStyles.card}>
-            <Text style={journalStyles.cardText}>{emptyMessage}</Text>
+          <View style={s.card}>
+            <Text style={s.cardText}>{emptyMessage}</Text>
             {journal.error !== '' && (
-              <Pressable style={journalStyles.button} onPress={journal.reload} accessibilityRole="button">
-                <Text style={journalStyles.buttonText}>Försök igen</Text>
+              <Pressable style={s.button} onPress={journal.reload} accessibilityRole="button">
+                <Text style={s.buttonText}>Försök igen</Text>
               </Pressable>
             )}
             {!journal.loading && journal.error === '' && (
-              <Link href="/journal" style={journalStyles.label}>Skriv ditt första inlägg →</Link>
+              <Link href="/journal" style={s.label}>Skriv ditt första inlägg →</Link>
             )}
           </View>
         }
@@ -46,7 +46,7 @@ export default function History() {
   );
 }
 
-const journalStyles = StyleSheet.create({
+const s = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: '#120239',
