@@ -5,10 +5,11 @@ import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 // The parent owns the draft; callbacks update it when thoughts are added or removed.
 type Props = {
   disabled: boolean;
+  items: string[];
+  setItems: (items: string[]) => void;
 };
 
-export default function InputPills({ disabled }: Props) {
-  const [items, setItems] = useState<string[]>([]);
+export default function InputPills({ disabled, items, setItems }: Props) {
   const [inputText, setInputText] = useState("");
   
   function addItem() {
@@ -80,7 +81,6 @@ const s = StyleSheet.create({
   root: {
     gap: 12,
     display:"flex",
-    justifyContent:"center",
     alignItems:"center"
   },
   text: {

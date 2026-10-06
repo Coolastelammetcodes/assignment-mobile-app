@@ -1,4 +1,4 @@
-﻿import { StyleSheet, ScrollView, Text } from 'react-native';
+﻿import { StyleSheet, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JournalDate from '@/components/journal-date';
 import JournalForm from '@/components/journal-form';
@@ -8,8 +8,10 @@ export default function Journal() {
     <SafeAreaView style={s.root} edges={['top', 'left', 'right']}>
       {/* Keep the form reachable when the keyboard covers the bottom of the screen. */}
         <ScrollView contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
-          <Text style={s.title}>Journal</Text>
-          <JournalDate />
+          <View style={s.surface}>
+            <Text style={s.title}>Journal</Text>
+            <JournalDate />
+          </View>
           <JournalForm />
         </ScrollView>
     </SafeAreaView>
@@ -34,5 +36,13 @@ const s = StyleSheet.create({
     fontWeight: '700',
     fontStyle: 'italic',
     color: '#F2EFF7',
+  },
+  surface: {
+    backgroundColor:"#AAA0C8",
+    marginHorizontal:16,
+    paddingHorizontal:10,
+    paddingVertical:12,
+    borderRadius:12,
+    marginTop:8
   },
 });
