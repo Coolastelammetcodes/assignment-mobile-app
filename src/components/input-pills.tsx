@@ -31,7 +31,7 @@ export default function InputPills({ disabled }: Props) {
 
   const addDisabled = disabled || inputText.trim() === '';
   return (
-    <View style={s.container}>
+    <View style={s.root}>
       <View style={s.inputGroup}>
         <TextInput
           style={[s.inputBase, s.input]}
@@ -77,6 +77,12 @@ export default function InputPills({ disabled }: Props) {
 }
 
 const s = StyleSheet.create({
+  root: {
+    gap: 12,
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center"
+  },
   text: {
     color: '#F2EFF7',
     fontSize: 16,
@@ -87,7 +93,7 @@ const s = StyleSheet.create({
     color: '#120239',
     padding: 14,
     borderRadius: 12,
-    minHeight: 100,
+    minHeight: 48,
     textAlignVertical: 'top',
   },
   button: {
@@ -105,14 +111,12 @@ const s = StyleSheet.create({
     fontWeight: '600',
     fontSize: 16,
   },
-  container: {
-    gap: 12,
-  },
   // Clip both children to one rounded outline so the input and button look connected.
   inputGroup: {
     borderRadius: 24,
     overflow: 'hidden',
     backgroundColor: '#E7E2EF',
+    width: "60%",
   },
   input: {
     borderRadius: 0,

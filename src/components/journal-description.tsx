@@ -5,17 +5,16 @@ export default function JournalDescription() {
   const [description, setDescription] = useState("");
     return (  
    <View style={s.inputGroup}>
-             <TextInput
-             style={[s.inputBase, s.input]}
-             placeholder="Det har varit en toppen dag på..."
-             placeholderTextColor="#625775"
-             accessibilityLabel="Kompletterande fritext"
-             multiline
-             value={description}
-             onChangeText={setDescription}
-             
-             />
-           </View>
+      <TextInput
+      style={[s.inputBase, s.input]}
+      placeholder="Det har varit en toppen dag på..."
+      placeholderTextColor="#625775"
+      accessibilityLabel="Beskriv din dag"
+      multiline
+      value={description}
+      onChangeText={setDescription}
+      />
+    </View>
   );
 }
 

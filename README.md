@@ -23,8 +23,10 @@ StyleSheet is used for styling and Platform checks which operating system is run
 - SQLite (expo-sqlite): saves, loads and deletes journal entries with key-value storage.
 - Crypto (expo-crypto): creates a unique ID for each entry with randomUUID.
 - StatusBar (expo-status-bar): keeps the phone's status bar text light against the dark background.
-- Expo Router (expo-router): Stack and Tabs organise screens, Link and router navigate, and useLocalSearchParams reads the selected entry's ID.
 - Feather and FontAwesome (@expo/vector-icons): icons in the tab bar and the cross on each thought pill.
+
+#### Routing
+Expo Router (expo-router): Stack and Tabs organise screens, Link and router navigate, and useLocalSearchParams reads the selected entry's ID.
 
 Haptics, SQLite, Crypto and StatusBar are the four SDK modules used for the assignment. Router and the icon library are listed separately from that count.
 

@@ -1,58 +1,11 @@
-import { useRef, useState } from 'react';
-import { router } from 'expo-router';
+import { useState } from 'react';
 import { StyleSheet, Pressable, Text, View } from 'react-native';
 import InputPills from './input-pills';
 import RatingSlider from './rating-slider';
-import { useJournal } from './journal-provider';
 import JournalDescription from './journal-description';
 
 export default function JournalForm() {
   const [rating, setRating] = useState(10);
-  const [items, setItems] = useState<string[]>([]);
-  const [description, setDescription] = useState('');
-  const [saving, setSaving] = useState(false);
-  const [saveError, setSaveError] = useState('');
-
-  const journal = useJournal();
-
-  const emptyDraft =
-    items.length === 0 &&
-    description.trim() === '';
-
-  const saveDisabled =
-    journal.loading ||
-    journal.error !== '' ||
-    saving ||
-    emptyDraft;
-
-  async function saveJournal() {
-    if (saveDisabled) {
-      return;
-    }
-
-    setSaving(true);
-    setSaveError('');
-
-    try {
-      await journal.saveEntry(
-        rating,
-        items,
-        description.trim()
-      );
-
-      setItems([]);
-      setDescription('');
-      setRating(10);
-
-      router.navigate('/history');
-    } catch {
-      setSaveError(
-        'Kunde inte spara inlägget. Din text finns kvar, försök igen.'
-      );
-    } finally {
-      setSaving(false);
-    }
-  }
 
   return(
     <View style={s.root}>
@@ -73,8 +26,7 @@ const s = StyleSheet.create({
     color: '#F2EFF7',
     fontSize: 16,
     lineHeight: 24,
-    justifyContent:"center",
-    alignItems: "center"
+    textAlign:"center"
   },
   button: {
     backgroundColor: '#6D438D',
