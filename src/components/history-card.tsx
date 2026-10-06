@@ -7,7 +7,7 @@ type Props = {
   entry: JournalEntry;
 };
 
-export default function JournalCard({ entry }: Props) {
+export default function HistoryCard({ entry }: Props) {
   const date = formatJournalDate(entry.createdAt);
   return (
     <Link href={{ pathname: '/history/[id]', params: { id: entry.id } }} asChild>

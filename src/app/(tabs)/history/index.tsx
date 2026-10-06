@@ -1,7 +1,7 @@
 import { Link } from 'expo-router';
 import { StyleSheet, FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import JournalCard from '@/components/journal-card';
+import JournalCard from '@/components/history-card';
 import { useJournal } from '@/components/journal-provider';
 
 export default function History() {

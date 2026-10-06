@@ -4,99 +4,62 @@ import { StyleSheet, Pressable, Text, View } from 'react-native';
 import InputPills from './input-pills';
 import RatingSlider from './rating-slider';
 import { useJournal } from './journal-provider';
+import JournalDescription from './journal-description';
 
 export default function JournalForm() {
   const [rating, setRating] = useState(10);
-  const [text, setText] = useState('');
-  const [notes, setNotes] = useState<string[]>([]);
+  const [items, setItems] = useState<string[]>([]);
+  const [description, setDescription] = useState('');
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState('');
+
   const journal = useJournal();
 
-  // A ref remembers a value without waiting for the screen to update.
-  // This stops two quick taps from saving the same draft twice.
-  const submitting = useRef(false);
+  const emptyDraft =
+    items.length === 0 &&
+    description.trim() === '';
 
-  const emptyDraft = notes.length === 0 && text.trim() === '';
-  const saveDisabled = journal.loading || journal.error !== '' || saving || emptyDraft;
-
-  let saveButtonText = 'Spara inlägg';
-  if (saving) {
-    saveButtonText = 'Sparar…';
-  }
+  const saveDisabled =
+    journal.loading ||
+    journal.error !== '' ||
+    saving ||
+    emptyDraft;
 
   async function saveJournal() {
-    if (saveDisabled || submitting.current) {
+    if (saveDisabled) {
       return;
     }
 
-    // Copy the thoughts so we do not change React state directly.
-    const allNotes = [...notes];
-    const lastThought = text.trim();
-    if (lastThought !== '') {
-      allNotes.push(lastThought);
-    }
-
-    submitting.current = true;
     setSaving(true);
     setSaveError('');
 
     try {
-      // await waits for storage. Only clear the draft after saving succeeds.
-      await journal.saveEntry(rating, allNotes);
-      setNotes([]);
-      setText('');
+      await journal.saveEntry(
+        rating,
+        items,
+        description.trim()
+      );
+
+      setItems([]);
+      setDescription('');
       setRating(10);
+
       router.navigate('/history');
     } catch {
-      setSaveError('Kunde inte spara inlägget. Din text finns kvar, försök igen.');
+      setSaveError(
+        'Kunde inte spara inlägget. Din text finns kvar, försök igen.'
+      );
     } finally {
-      // finally runs whether saving succeeds or fails.
-      submitting.current = false;
       setSaving(false);
     }
   }
 
-  return (
+  return(
     <View style={s.form}>
-      <Text style={s.text}>Ge dagen ett betyg mellan 1–10</Text>
-      <RatingSlider
-        value={rating}
-        highestValue={10}
-        step={1}
-        textColor="#E7E2EF"
-        sliderColor="#AAA0C8"
-        onChange={setRating}
-        disabled={saving}
-      />
-      <InputPills
-        text={text}
-        items={notes}
-        onChangeText={setText}
-        onChangeItems={setNotes}
-        disabled={saving}
-      />
-      {/* && shows the message only when the condition is true. */}
-      {journal.loading && <Text style={s.text}>Läser journalen…</Text>}
-      {journal.error !== '' && (
-        <View style={s.form}>
-          <Text style={s.text}>{journal.error}</Text>
-          <Pressable style={s.button} onPress={journal.reload} accessibilityRole="button">
-            <Text style={s.buttonText}>Försök igen</Text>
-          </Pressable>
-        </View>
-      )}
-      {saveError !== '' && (
-        <Text style={s.text} accessibilityRole="alert">{saveError}</Text>
-      )}
-      <Pressable
-        style={[s.button, saveDisabled && s.disabled]}
-        accessibilityRole="button"
-        disabled={saveDisabled}
-        onPress={saveJournal}
-      >
-        <Text style={s.buttonText}>{saveButtonText}</Text>
-      </Pressable>
+      <RatingSlider value={rating} highestValue={10} step={1} sliderColor='#6D438D' onChange={setRating} />
+      <Text style={s.text}>Skriv enstaka ord för att beskriva dagen</Text>
+      <InputPills disabled={false} />
+      <JournalDescription />
     </View>
   );
 }
@@ -125,4 +88,21 @@ const s = StyleSheet.create({
   disabled: {
     opacity: 0.5,
   },
+  inputGroup: {
+    borderRadius: 24,
+    overflow: 'hidden',
+    backgroundColor: '#E7E2EF',
+  },
+  input: {
+    borderRadius: 0,
+  },
+  inputBase: {
+    backgroundColor: '#E7E2EF',
+    color: '#120239',
+    padding: 14,
+    borderRadius: 12,
+    minHeight: 100,
+    textAlignVertical: 'top',
+  },
+  // #1B0B4B → #2D176E → #8B7BFF → #D9D5FF
 });

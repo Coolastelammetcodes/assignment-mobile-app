@@ -8,7 +8,7 @@ type JournalContextValue = {
   loading: boolean;
   error: string;
   reload: () => Promise<void>;
-  saveEntry: (rating: number, notes: string[]) => Promise<void>;
+  saveEntry: (rating: number, items: string[], description: string) => Promise<void>;
   deleteEntry: (id: string) => Promise<void>;
 };
 // Context lets Journal and History use the same entries and functions.

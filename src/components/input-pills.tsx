@@ -1,50 +1,48 @@
 ﻿import { Feather } from '@expo/vector-icons';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 // The parent owns the draft; callbacks update it when thoughts are added or removed.
 type Props = {
-  text: string;
-  items: string[];
-  onChangeText: (text: string) => void;
-  onChangeItems: (items: string[]) => void;
   disabled: boolean;
 };
 
-export default function InputPills({ text, items, onChangeText, onChangeItems, disabled }: Props) {
+export default function InputPills({ disabled }: Props) {
+  const [items, setItems] = useState<string[]>([]);
+  const [inputText, setInputText] = useState("");
+  
   function addItem() {
     // trim removes surrounding whitespace and prevents empty thoughts.
-    const newThought = text.trim();
+    const newThought = inputText.trim();
     if (disabled || newThought === '') {
       return;
     }
     // Spread copies the existing thoughts into a new array before adding the new one.
     const updatedThoughts = [...items, newThought];
-    onChangeItems(updatedThoughts);
+    setItems(updatedThoughts);
     // Clear the parent's text state so the controlled input is ready for another thought.
-    onChangeText('');
+    setInputText('');
   }
-
   function removeItem(index: number) {
     // filter keeps every other index, so identical thoughts can be removed separately.
     const remainingThoughts = items.filter((item, itemIndex) => itemIndex !== index);
-    onChangeItems(remainingThoughts);
+    setItems(remainingThoughts);
   }
 
-  const addDisabled = disabled || text.trim() === '';
+  const addDisabled = disabled || inputText.trim() === '';
   return (
     <View style={s.container}>
-      <Text style={s.text}>Skriv enstaka ord för att beskriva dagen</Text>
       <View style={s.inputGroup}>
         <TextInput
           style={[s.inputBase, s.input]}
-          placeholder="Skriv en tanke om dagen…"
+          placeholder="Rolig"
           placeholderTextColor="#625775"
-          accessibilityLabel="Anteckning om dagen"
-          multiline
-          value={text}
-          onChangeText={onChangeText}
+          accessibilityLabel="Ord för att beskriva dagen"
+          value={inputText}
+          onChangeText={setInputText}
           editable={!disabled}
         />
+        
         <Pressable
           style={[s.button, s.addButton, addDisabled && s.disabled]}
           onPress={addItem}
@@ -72,7 +70,7 @@ export default function InputPills({ text, items, onChangeText, onChangeItems, d
               <Feather name="x" size={16} color="#F2EFF7" />
             </Pressable>
           </View>
-        ))}
+        ))}  
       </View>
     </View>
   );
