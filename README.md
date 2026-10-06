@@ -14,7 +14,6 @@ This app is built with components from React-Native and Expo. The components tha
 - Pressable: adds and removes thoughts, saves entries, opens cards and deletes entries.
 - FlatList: displays the saved entries in History.
 - ScrollView: makes longer forms and entries scrollable.
-- KeyboardAvoidingView: keeps the journal form accessible when the keyboard is open.
 
 StyleSheet is used for styling and Platform checks which operating system is running. These are APIs, not components. Button has been replaced by Pressable.
 

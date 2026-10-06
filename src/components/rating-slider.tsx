@@ -13,9 +13,6 @@ type Props = {
 };
 
 export default function RatingSlider({ value, highestValue, step, sliderColor, onChange, disabled }: Props) {
-  // Keep these styles inside the component because the text color comes from props.
-  
-
   let emoji = '😁';
   if (value <= 3) {
     emoji = '😔';

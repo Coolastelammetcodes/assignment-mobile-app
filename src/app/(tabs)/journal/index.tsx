@@ -1,24 +1,17 @@
-﻿import { StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Text } from 'react-native';
+﻿import { StyleSheet, ScrollView, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import JournalDate from '@/components/journal-date';
 import JournalForm from '@/components/journal-form';
 
 export default function Journal() {
-  let keyboardBehavior: 'height' | 'padding' = 'height';
-  if (Platform.OS === 'ios') {
-    keyboardBehavior = 'padding';
-  }
-
   return (
     <SafeAreaView style={s.root} edges={['top', 'left', 'right']}>
       {/* Keep the form reachable when the keyboard covers the bottom of the screen. */}
-      <KeyboardAvoidingView style={s.fill} behavior={keyboardBehavior}>
         <ScrollView contentContainerStyle={s.content} keyboardShouldPersistTaps="handled">
           <Text style={s.title}>Journal</Text>
           <JournalDate />
           <JournalForm />
         </ScrollView>
-      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }

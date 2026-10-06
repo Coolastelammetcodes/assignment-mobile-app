@@ -55,7 +55,7 @@ export default function JournalForm() {
   }
 
   return(
-    <View style={s.form}>
+    <View style={s.root}>
       <RatingSlider value={rating} highestValue={10} step={1} sliderColor='#6D438D' onChange={setRating} />
       <Text style={s.text}>Skriv enstaka ord för att beskriva dagen</Text>
       <InputPills disabled={false} />
@@ -65,13 +65,16 @@ export default function JournalForm() {
 }
 
 const s = StyleSheet.create({
-  form: {
+  root: {
     gap: 16,
   },
   text: {
+    display:"flex",
     color: '#F2EFF7',
     fontSize: 16,
     lineHeight: 24,
+    justifyContent:"center",
+    alignItems: "center"
   },
   button: {
     backgroundColor: '#6D438D',
