@@ -32,7 +32,7 @@ export default function History() {
           <View style={s.card}>
             <Text style={s.cardText}>{emptyMessage}</Text>
             {journal.error !== '' && (
-              <Pressable style={s.button} onPress={journal.reload} accessibilityRole="button">
+              <Pressable style={s.button} onPress={journal.Reload} accessibilityRole="button">
                 <Text style={s.buttonText}>Försök igen</Text>
               </Pressable>
             )}

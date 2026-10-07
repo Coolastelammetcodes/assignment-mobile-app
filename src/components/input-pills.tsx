@@ -83,11 +83,6 @@ const s = StyleSheet.create({
     display:"flex",
     alignItems:"center"
   },
-  text: {
-    color: '#F2EFF7',
-    fontSize: 16,
-    lineHeight: 24,
-  },
   inputBase: {
     backgroundColor: '#E7E2EF',
     color: '#120239',

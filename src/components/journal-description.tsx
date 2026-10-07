@@ -19,9 +19,6 @@ export default function JournalDescription() {
 }
 
 const s = StyleSheet.create({
-  form: {
-    gap: 16,
-  },
   text: {
     color: '#F2EFF7',
     fontSize: 16,

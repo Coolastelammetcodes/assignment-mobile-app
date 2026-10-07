@@ -122,11 +122,6 @@ To check the app on a phone:
 - [x] A detail screen receives a route parameter.
 - [x] README includes title, description, setup and component/module lists.
 - [x] The project uses Git and has a GitHub remote.
-- [ ] Before submission: check that all changes are committed and pushed, and that the GitHub repository is public.
-- [ ] Before submission: test the flow on a phone with Expo Go.
-- [ ] Submit a zip without node_modules, but keep the .git folder.
-
-Keep committing during development so the Git history shows the work over time.
 
 ## Updated history features
 

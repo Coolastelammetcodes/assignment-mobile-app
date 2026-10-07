@@ -19,6 +19,8 @@ export default function JournalForm() {
     Haptics.NotificationFeedbackType.Success
   );
 
+  setItems([]);
+
   Alert.alert("Sparat!")
 
   scrollViewref.current?.scrollTo({
@@ -77,25 +79,6 @@ const s = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "600",
     fontSize: 16,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  inputGroup: {
-    borderRadius: 24,
-    overflow: "hidden",
-    backgroundColor: "#E7E2EF",
-  },
-  input: {
-    borderRadius: 0,
-  },
-  inputBase: {
-    backgroundColor: "#E7E2EF",
-    color: "#120239",
-    padding: 14,
-    borderRadius: 12,
-    minHeight: 100,
-    textAlignVertical: "top",
   },
   surface: {
     backgroundColor: "#AAA0C8",
